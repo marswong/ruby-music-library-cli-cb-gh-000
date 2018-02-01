@@ -27,7 +27,7 @@ class Genre
   end
 
   def save
-    self.class.all << self unless self.class.all.include?(self)
+    self.class.all << self
   end
 
   def artists
