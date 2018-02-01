@@ -2,7 +2,7 @@ require_relative "../config/environment"
 
 class Artist
   extend Concerns::Findable
-  
+
   attr_accessor :name
   attr_reader :songs
   @@all = []
@@ -10,7 +10,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
     self.save
   end
 
