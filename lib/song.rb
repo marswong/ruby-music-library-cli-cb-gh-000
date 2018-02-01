@@ -6,9 +6,6 @@ class Song
     @name = name
     @artist = artist
     @genre = genre
-    artist.genres << genre if !artist.genres.include?(genre)
-    genre.artists << artist if !genre.artists.include?(artist)
-    self.save
   end
 
   def self.all
@@ -16,29 +13,28 @@ class Song
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def self.create(name)
-    @@all << self.new(name)
+    song = new(name)
+    song.save
+    song
   end
 
   def self.find_by_name(name)
-    @@all.bsearch { |song| song.name == name }
+    all.bsearch { |song| song.name == name }
   end
 
   def self.find_or_create_by_name(name)
-    self.find_by_name(name) || self.create(name)
+    find_by_name(name) || create(name)
   end
 
   def self.new_by_filename(filename)
     arr = filename.split(" - ")
-    song = self.new(arr[1])
-    artist = Artist.new(arr[0])
-    artist.songs << song
-    song.artist = artist
-    artist.save
-    song
+    artist = Artist.find_or_create_by_name(arr[0])
+    genre = Genre.find_or_create_by_name(arr[2])
+    song = new(arr[1], artist, genre)
   end
 
   def self.create_from_filename(filename)
@@ -46,16 +42,16 @@ class Song
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def artist=(artist)
-    artist.add_song(self)
     @artist = artist
+    artist.add_song(self)
   end
 
   def genre=(genre)
     @genre = genre
-    genre.songs << self if !genre.songs.include?(self)
+    genre.songs << self unless genre.songs.include?(self)
   end
 end
