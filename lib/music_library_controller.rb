@@ -18,20 +18,22 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     input = ""
+    
     until input == "exit"
       input = gets.strip
-      case user_input
-        when 'list songs'
+      
+      case input
+        when "list songs"
           list_songs
-        when 'list artists'
+        when "list artists"
           list_artists
-        when 'list genres'
+        when "list genres"
           list_genres
-        when 'list artist'
+        when "list artist"
           list_songs_by_artist
-        when 'list genre'
+        when "list genre"
           list_songs_by_genre
-        when 'play song'
+        when "play song"
           play_song
       end
     end
