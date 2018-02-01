@@ -41,17 +41,17 @@ class MusicLibraryController
 
   def list_songs
     songs = Song.all.sort_by { |song| song.name }
-    songs.each.with_index { |song, i| puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" }
+    songs.each.with_index { |song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" }
   end
 
   def list_artists
     artists = Artist.all.sort_by { |artist| artist.name }
-    artists.each.with_index { |artist, index| puts "#{i + 1}. #{artist.name}" }
+    artists.each.with_index { |artist, index| puts "#{index + 1}. #{artist.name}" }
   end
 
   def list_genres
-    Genre.all.sort_by { |genre| genre.name }.each.with_index(1){
-    |genre,i| puts "#{i}. #{genre.name}"}
+    genres = Genre.all.sort_by { |genre| genre.name }
+    genres.each.with_index { |genre, index| puts "#{index + 1}. #{genre.name}" }
   end
 
   def list_songs_by_artist
