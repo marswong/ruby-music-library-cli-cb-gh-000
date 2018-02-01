@@ -4,11 +4,11 @@ Bundler.require
 module Concerns
   module Findable
     def find_by_name(name)
-      self.all.bsearch { |obj| obj.name == name }
+      all.bsearch { |obj| obj.name == name }
     end
 
     def find_or_create_by_name(name)
-      self.find_by_name(name) || self.create(name)
+      find_by_name(name) || create(name)
     end
   end
 end
