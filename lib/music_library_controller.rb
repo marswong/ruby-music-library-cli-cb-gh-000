@@ -14,7 +14,9 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    until gets.strip == "exit"    
+    input = gets.strip
+    until input == "exit"
+      input = gets.strip
     end
   end
 end
