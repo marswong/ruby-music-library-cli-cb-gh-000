@@ -45,7 +45,7 @@ class Song
     arr = filename.split(" - ")
     artist = Artist.find_or_create_by_name(arr[0])
     genre = Genre.find_or_create_by_name(arr[2])
-    song = new(arr[1], artist, genre)
+    song = new(arr[1].split(".mp3")[0], artist, genre)
   end
 
   def self.create_from_filename(filename)
