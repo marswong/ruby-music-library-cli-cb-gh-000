@@ -1,4 +1,7 @@
+require_relative "../config/environment"
+
 class Artist
+  extend Findable
   attr_accessor :name, :songs, :genres
   @@all = []
 
