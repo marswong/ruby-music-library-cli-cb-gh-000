@@ -1,4 +1,6 @@
 class MusicLibraryController
+  attr_accessor :path
+  
   def initialize(path = "./db/mp3s")
     MusicImporter.new(path)
   end
@@ -17,6 +19,13 @@ class MusicLibraryController
     input = gets.strip
     until input == "exit"
       input = gets.strip
+    end
+  end
+
+  def list_songs
+    filenames = Dir.entries(@path).select { |filename| filename.end_with?(".mp3") }
+    filenames.each.with_index do |filename, index|
+      puts "#{index + 1}. #{filename.split(".mp3")[0]}"
     end
   end
 end
