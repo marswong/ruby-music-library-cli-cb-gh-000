@@ -45,4 +45,41 @@ class MusicLibraryController
       puts "#{index + 1}. #{filename.split(".mp3")[0]}"
     end
   end
+
+  def list_artists
+    Artist.all.sort_by { |artist| artist.name }.each.with_index(1){ 
+      |artist,i| puts "#{i}. #{artist.name}"}
+  end
+  
+  def list_genres 
+    Genre.all.sort_by { |genre| genre.name }.each.with_index(1){ 
+    |genre,i| puts "#{i}. #{genre.name}"}
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    if artist = Artist.find_by_name(input)
+      artist.songs.sort_by{ |song| song.name}.each.with_index(1){ |song,i| puts "#{i}. #{song.name} - #{song.genre.name}"
+      }
+    end
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    if genre = Genre.find_by_name(input)
+      genre.songs.sort_by{ |song| song.name}.each.with_index(1){ |song,i| puts "#{i}. #{song.artist.name} - #{song.name}" 
+      }
+    end
+  end
+  
+  def play_song
+    puts "Which song number would you like to play?"
+    user_input = gets.strip.to_i
+    if (1..Song.all.length).include?(user_input)
+      song = Song.all.sort_by { |song| song.name }[user_input - 1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
+  end
 end
