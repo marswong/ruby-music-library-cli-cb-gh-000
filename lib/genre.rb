@@ -2,15 +2,14 @@ require_relative "../config/environment"
 
 class Genre
   extend Concerns::Findable
-  
-  attr_accessor :name, :songs, :artists
+
+  attr_accessor :name
+  attr_reader :songs
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    @artists = []
-    self.save
   end
 
   def self.all
@@ -18,14 +17,20 @@ class Genre
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def self.create(name)
-    @@all << self.new(name)
+    genre = new(name)
+    genre.save
+    genre
   end
 
   def save
-    @@all << self
+    self.class.all << self
+  end
+
+  def artists
+    songs.map{ |song| song.artist }.uniq
   end
 end
