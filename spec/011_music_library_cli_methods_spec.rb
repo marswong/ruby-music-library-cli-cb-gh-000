@@ -53,7 +53,7 @@ describe "CLI Methods" do
       # expect($stdout).to receive(:puts).with("2. dance")
       # expect($stdout).to receive(:puts).with("3. hip-hop")
       # expect($stdout).to receive(:puts).with("4. indie")
-      # 
+      #
       music_library_controller.list_genres
     end
 
