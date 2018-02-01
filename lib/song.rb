@@ -23,6 +23,10 @@ class Song
     @@all << self.new(name)
   end
 
+  def self.find_by_name(name)
+    @@all.bsearch { |song| song.name == name }
+  end
+
   def save
     @@all << self
   end
