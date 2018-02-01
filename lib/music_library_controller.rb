@@ -18,10 +18,10 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     input = ""
-    
+
     until input == "exit"
       input = gets.strip
-      
+
       case input
         when "list songs"
           list_songs
@@ -40,7 +40,7 @@ class MusicLibraryController
   end
 
   def list_songs
-    filenames = Dir.entries(@path).select { |filename| filename.end_with?(".mp3") }
+    filenames = Dir.entries(@path).select{ |filename| filename.end_with?(".mp3") }.sort
     filenames.each.with_index do |filename, index|
       puts "#{index + 1}. #{filename.split(".mp3")[0]}"
     end
