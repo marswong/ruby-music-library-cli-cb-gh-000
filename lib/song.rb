@@ -38,7 +38,7 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    self.new_by_filename(filename)
+    new_by_filename(filename).save
   end
 
   def save
