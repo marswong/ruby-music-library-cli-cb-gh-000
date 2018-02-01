@@ -40,19 +40,19 @@ class MusicLibraryController
   end
 
   def list_songs
-    filenames = Dir.entries(@path).select{ |filename| filename.end_with?(".mp3") }.sort
-    filenames.each.with_index do |filename, index|
-      puts "#{index + 1}. #{filename.split(".mp3")[0]}"
+    songs = Song.all.sort_by { |song| song.name }
+    songs.each.with_index do |song, i|
+      puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"      
     end
   end
 
   def list_artists
-    Artist.all.sort_by { |artist| artist.name }.each.with_index(1){ 
+    Artist.all.sort_by { |artist| artist.name }.each.with_index(1){
       |artist,i| puts "#{i}. #{artist.name}"}
   end
-  
-  def list_genres 
-    Genre.all.sort_by { |genre| genre.name }.each.with_index(1){ 
+
+  def list_genres
+    Genre.all.sort_by { |genre| genre.name }.each.with_index(1){
     |genre,i| puts "#{i}. #{genre.name}"}
   end
 
@@ -64,16 +64,16 @@ class MusicLibraryController
       }
     end
   end
-  
+
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     input = gets.strip
     if genre = Genre.find_by_name(input)
-      genre.songs.sort_by{ |song| song.name}.each.with_index(1){ |song,i| puts "#{i}. #{song.artist.name} - #{song.name}" 
+      genre.songs.sort_by{ |song| song.name}.each.with_index(1){ |song,i| puts "#{i}. #{song.artist.name} - #{song.name}"
       }
     end
   end
-  
+
   def play_song
     puts "Which song number would you like to play?"
     user_input = gets.strip.to_i
