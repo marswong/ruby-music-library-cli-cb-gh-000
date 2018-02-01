@@ -7,6 +7,7 @@ class Song
     @artist = artist
     @genre = genre
     artist.genres << genre if !artist.genres.include?(genre)
+    genre.artists << artist if !genre.artists.include?(artist)
     self.save
   end
 
